@@ -1,0 +1,19 @@
+:root {
+	/* this is to add Rubik font to the bootstrap */
+	--bs-font-sans-serif: 'Rubik', sans-serif;
+}
+
+/* making a container a little bit larger */
+.container-xxl {
+	max-width: 1530px;
+}
+
+body {
+	background-image: url('/img/i-like-food.svg');
+	background-color: rgb(243, 243, 243);
+}
+
+a {
+	/* change the usually bootstrap links from blue to dark */
+	color: var(--bs-dark);
+}

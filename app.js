@@ -8,7 +8,7 @@ require('dotenv').config();
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public')); //every time we require something to our html such as images, scripts, stylesheet or whatever, we just specify the last path e.g: /img/img123.png
+app.use(express.static('public')); //every time we require something to our html such as images, scripts, stylesheet or whatever, we just specify the last path e.g: /img/img123.png, we don't need to type /public/img/img123.png for ex.
 app.use(expressLayouts);
 
 app.set('layout', './layouts/main');
