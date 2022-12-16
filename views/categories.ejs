@@ -4,13 +4,20 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Explore Categories</li>
+        <!-- the EJS here i'm basically saying if there is category I'm gonna print it's name here and leave it active, otherwise I  -->
+        <li class="breadcrumb-item <%= typeof categoryById == 'undefined' ? 'active' : '' %> " aria-current="page">
+            <a href="/categories"> Categories </a>
+        </li>
+
+        <% if( typeof categoryById !='undefined'){ //another way to check if the object exists %>
+            <li class="breadcrumb-item <%= categoryById ? 'active' : '' %>" aria-current="page"> <%= categoryId %>  </li>
+        <% } %> 
     </ol>
 </nav>
 
 
 <div class="row row-cols-5 g-2 g-lg-3 mb-4">
-    <% if (categories !='' ) { %>
+    <% if (typeof categories !== 'undefined' && categories.length > 0 ) { %>
         <% categories.forEach((category, index)=> { %>
             <a href="/categories/<%- category.name %>" class="col text-center category__link">
                 <div class="category__img shadow">
@@ -22,4 +29,21 @@
             </a>
         <% }) %>
     <% } %>
+</div>
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <% if( typeof categoryById != 'undefined' && categoryById.length> 0 ){ //another way to check if the object exists %>
+        <% categoryById.forEach((recipe, index)=> { %>
+            <a href="/recipe/<%= recipe._id %> " class="col text-center category__link">
+                <div class="category__img category__img--large shadow">
+                    <img src="/uploads/<%= recipe.image %> " alt="<%- recipe.name %> " loading="lazy">
+                </div>
+                <div class="pt-1">
+                    <%= recipe.name %>
+                </div>
+            </a>
+        <% }) %>
+    <% } else { %>
+        No Items Found.
+    <% } %> 
 </div>

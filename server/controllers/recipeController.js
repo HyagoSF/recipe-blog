@@ -54,6 +54,28 @@ exports.exploreCategories = async (req, res) => {
 };
 
 /**
+ * GET /categories/:categoryId
+ * Category By Id
+ */
+exports.exploreCategoriesById = async (req, res) => {
+	try {
+		const categoryId = req.params.categoryId; //here i'm calling categoryId as my category name
+		const limitNumber = 20;
+		const categoryById = await Recipe.find({'category': categoryId}).limit(limitNumber);
+		res.render('categories', {
+			title: 'Recipe Blog - Categories',
+			categoryId,
+			categoryById,
+
+		}); //here i'm passing my title
+	} catch (error) {
+		res.status(500).send({
+			message: error.message || 'Some Error Occurred',
+		});
+	}
+};
+
+/**
  * GET /recipe/:id
  * Recipe
  */
@@ -72,3 +94,4 @@ exports.exploreRecipe = async (req, res) => {
 		});
 	}
 };
+
