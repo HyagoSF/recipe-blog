@@ -11,4 +11,5 @@ try {
 }
 
 // Models
-require('./Category');
+require('./Category'); //creating the model of Categories in my database
+require('./Recipe'); //creating the model of Recipes in my database
