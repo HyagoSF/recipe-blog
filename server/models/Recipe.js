@@ -29,5 +29,13 @@ const recipeSchema = new mongoose.Schema({
 	},
 });
 
+// In order to be able to search for specific words:
+// recipeSchema.index({ name: 'text', description: 'text' });
+// or
+// WildCard Indexing
+recipeSchema.index({"$**" : 'text'});
+
+
+
 // Compile our Schema into a Model
 module.exports = mongoose.model('Recipe', recipeSchema); // Recipe will be my Model name.

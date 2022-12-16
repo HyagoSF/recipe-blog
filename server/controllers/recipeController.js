@@ -61,12 +61,13 @@ exports.exploreCategoriesById = async (req, res) => {
 	try {
 		const categoryId = req.params.categoryId; //here i'm calling categoryId as my category name
 		const limitNumber = 20;
-		const categoryById = await Recipe.find({'category': categoryId}).limit(limitNumber);
+		const categoryById = await Recipe.find({ category: categoryId }).limit(
+			limitNumber
+		);
 		res.render('categories', {
 			title: 'Recipe Blog - Categories',
 			categoryId,
 			categoryById,
-
 		}); //here i'm passing my title
 	} catch (error) {
 		res.status(500).send({
@@ -95,3 +96,19 @@ exports.exploreRecipe = async (req, res) => {
 	}
 };
 
+/**
+ * POST /search
+ * Search
+ */
+exports.searchRecipe = async (req, res) => {
+	try {
+		const searchTerm = req.body.searchTerm;
+		const recipe = await Recipe.find({ $text: { $search: searchTerm, $diacriticSensitive: true } });
+
+		res.render('search', { title: 'Cooking Blog - Search', results: recipe });
+	} catch (error) {
+		res.status(500).send({
+			message: error.message || 'Something Went Wrong',
+		});
+	}
+};
