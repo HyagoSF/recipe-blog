@@ -10,6 +10,7 @@ router.get('/recipe/:id', recipeController.exploreRecipe);  //:id is to go to an
 router.get('/categories', recipeController.exploreCategories);
 router.get('/categories/:categoryId', recipeController.exploreCategoriesById);
 router.get('/explore-latest', recipeController.exploreLatest);
+router.get('/random-recipe',recipeController.getRandomRecipe);
 
 
 router.post('/search', recipeController.searchRecipe);
