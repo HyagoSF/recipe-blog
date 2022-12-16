@@ -97,15 +97,40 @@ exports.exploreRecipe = async (req, res) => {
 };
 
 /**
+ * GET /explore-latest
+ * Explore Latest Recipes
+ */
+exports.exploreLatest = async (req, res) => {
+	try {
+		const limitNumber = 20;
+		const lastRecipes = await Recipe.find({})
+			.sort({ _id: -1 })
+			.limit(limitNumber);
+
+		res.render('explore-latest', {title: 'Cooking Blog - Recipe', lastRecipes });
+	} catch (error) {
+		res.status(500).send({
+			message: error.message || 'Something Went Wrong',
+		});
+	}
+};
+
+/**
  * POST /search
  * Search
  */
 exports.searchRecipe = async (req, res) => {
 	try {
 		const searchTerm = req.body.searchTerm;
-		const recipe = await Recipe.find({ $text: { $search: searchTerm, $diacriticSensitive: true } });
+		const recipe = await Recipe.find({
+			$text: { $search: searchTerm, $diacriticSensitive: true },
+		});
 
-		res.render('search', { title: 'Cooking Blog - Search', results: recipe });
+		res.render('search', {
+			title: 'Cooking Blog - Search',
+			results: recipe,
+			searchTerm,
+		});
 	} catch (error) {
 		res.status(500).send({
 			message: error.message || 'Something Went Wrong',
