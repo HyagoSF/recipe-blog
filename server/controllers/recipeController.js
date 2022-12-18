@@ -86,7 +86,7 @@ exports.exploreRecipe = async (req, res) => {
 		// const recipe = await Recipe.find({ '_id': recipeId });
 		const recipe = await Recipe.findById(recipeId);
 		res.render('recipe', {
-			title: 'Cooking Blog - Recipe',
+			title: 'Recipe Blog - Recipe',
 			recipe,
 		});
 	} catch (error) {
@@ -108,7 +108,7 @@ exports.exploreLatest = async (req, res) => {
 			.limit(limitNumber);
 
 		res.render('explore-latest', {
-			title: 'Cooking Blog - Recipe',
+			title: 'Recipe Blog - Recipe',
 			lastRecipes,
 		});
 	} catch (error) {
@@ -126,18 +126,39 @@ exports.getRandomRecipe = async (req, res) => {
 	try {
 		const recipe = await Recipe.find({});
 		let randomNumber = Math.floor(Math.random() * recipe.length);
-		let randomRecipe = recipe[randomNumber]
+		let randomRecipe = recipe[randomNumber];
 
 		// // To get a random as well I can do like this:
 		// let count = await Recipe.find().countDocuments();
 		// let random = Math.floor(Math.random() * count);
 		// let randomRecipe = await Recipe.findOne().skip(random).exec();	//findOne, than skip to the random number we generate, than execute it
 
-		res.render('explore-random', {title: 'Recipe Blog - Random Recipe', randomRecipe});
+		res.render('explore-random', {
+			title: 'Recipe Blog - Random Recipe',
+			randomRecipe,
+		});
 		// res.json(randomRecipe[randomNumber]);
 	} catch (error) {
 		res.status(500).send({
 			message: error.message || 'Something went wrong',
+		});
+	}
+};
+
+/**
+ * GET /submit-recipe
+ * Submit-recipe
+ */
+
+exports.submitRecipe = async (req, res) => {
+	try {
+		res.render('submit-recipe', {title: "Recipe Blog - Submit Recipe"});
+
+
+
+	} catch (error) {
+		res.status(500).send({
+			message: error.message || 'Something Went Wrong',
 		});
 	}
 };
@@ -154,7 +175,7 @@ exports.searchRecipe = async (req, res) => {
 		});
 
 		res.render('search', {
-			title: 'Cooking Blog - Search',
+			title: 'Recipe Blog - Search',
 			results: recipe,
 			searchTerm,
 		});
