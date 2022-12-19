@@ -241,3 +241,29 @@ exports.submitRecipeOnPost = async (req, res) => {
 		res.redirect('/submit-recipe');
 	}
 };
+
+
+
+//async function to UPDATE some object
+async function updateRecipe() {
+	try {
+		const res = await Recipe.updateOne(
+			{ name: 'New Recipe' },
+			{ name: 'New Recipe Updated' }
+		);
+		res.n; // Number of documents matched
+		res.nModified; //Num of documents modified
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+
+//async function to DELETE some object
+async function deleteRecipe() {
+	try {
+		await Recipe.deleteOne({ name: 'New Recipe Updated' });
+	} catch (error) {
+		console.log(error);
+	}
+}
