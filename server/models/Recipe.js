@@ -25,7 +25,7 @@ const recipeSchema = new mongoose.Schema({
 	},
 	image: {
 		type: String,
-		required: 'This field is required.',
+		// required: 'This field is required.',
 	},
 });
 
@@ -33,9 +33,7 @@ const recipeSchema = new mongoose.Schema({
 // recipeSchema.index({ name: 'text', description: 'text' });
 // or
 // WildCard Indexing
-recipeSchema.index({"$**" : 'text'});
-
-
+recipeSchema.index({ '$**': 'text' });
 
 // Compile our Schema into a Model
 module.exports = mongoose.model('Recipe', recipeSchema); // Recipe will be my Model name.

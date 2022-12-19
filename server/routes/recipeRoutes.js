@@ -11,8 +11,9 @@ router.get('/categories', recipeController.exploreCategories);
 router.get('/categories/:categoryId', recipeController.exploreCategoriesById);
 router.get('/explore-latest', recipeController.exploreLatest);
 router.get('/random-recipe',recipeController.getRandomRecipe);
-router.get('/submit-recipe', recipeController.submitRecipe);
 
+router.get('/submit-recipe', recipeController.submitRecipe);
+router.post('/submit-recipe', recipeController.submitRecipeOnPost);
 
 
 
