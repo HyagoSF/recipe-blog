@@ -28,7 +28,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
-    "mongodb": "^4.12.1",
+    "mongodb": "^4.17.0",
     "mongoose": "^6.11.3"
   },
   "devDependencies": {
